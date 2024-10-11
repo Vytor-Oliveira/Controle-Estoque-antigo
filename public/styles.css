@@ -1,0 +1,82 @@
+/* ESSE STYLES É DO NAVBAR  */
+body {
+  background-color: #e0e0e0;
+}
+.navbar {
+  background-color: #a3a4a4;
+  border-bottom: 1px solid #ccc;
+}
+.container-fluid {
+  background-color: #ccc;
+  padding: 20px;
+}
+.dropdown-menu {
+  min-width: 10rem;
+}
+.form-control, .btn, .dropdown-toggle {
+  margin-bottom: 10px;
+}
+.custom-dropdown {
+  display: inline-block;
+}
+.modal-header {
+  background-color: #00aaff;
+  color: white;
+}
+.modal-body {
+  background-color: #fff;
+}
+.modal-content {
+  border: 2px solid #00aaff;
+}
+.modal-footer {
+  display: none;
+}
+
+
+
+
+
+
+
+
+
+/* MODAL NÃO TIRAR INICIO */
+.modal-body form label {
+  display: block;
+}
+
+.modal-body form .form-group {
+  margin-bottom: 1rem;
+}
+
+.modal-footer {
+  justify-content: flex-start;
+}
+
+.sub-section {
+  border: 1px solid #007bff;
+  padding: 15px;
+  margin-top: 20px;
+}
+
+.sub-section legend {
+  width: auto;
+  padding: 0 10px;
+  border-bottom: none;
+}
+
+.form-row {
+  margin-bottom: 10px;
+}
+
+.modal-header {
+  background-color: #007bff;
+  color: white;
+}
+
+.modal-header .close {
+  color: white;
+}
+
+/* MODAL NÃO TIRAR FIM */

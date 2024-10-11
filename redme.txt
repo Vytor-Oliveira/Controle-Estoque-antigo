@@ -1,0 +1,1 @@
+INSERT INTO usuarios (id, nome, email, senha, createdAt, updatedAt) VALUES (1, 'Admin', 'admin@example.com', 'admin', NOW(), NOW());

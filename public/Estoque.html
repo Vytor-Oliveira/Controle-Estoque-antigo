@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Controle Estoque</title>
+    <link rel="shortcut icon" href="ico/estoque.ico" type="image/x-icon" />
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"/>
+    <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <i class="fa-solid fa-shop">    <a class="navbar-brand" href="produtos.html">   Produtos</a> </i>
+        <i class="fa-solid fa-box"> <a class="navbar-brand" href="Estoque.html">   Estoque</a> </i>
+    </nav>
+    <div class="container-fluid">
+        <div id="notifications" class="mt-2"></div>
+        <div class="row">
+            <div class="col">
+
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col">
+                <div class="custom-dropdown">
+                    <button class="btn btn-success dropdown-toggle" type="button" id="movimentacaoDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Movimentação
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="movimentacaoDropdown">
+                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#movimentacaoEntradaModal">Movimentação Entrada</a>
+                    </div>
+                </div>
+                <div class="custom-dropdown ml-2">
+                    <button class="btn btn-info dropdown-toggle" type="button" id="alterarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Alterar
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="alterarDropdown">
+                        <a class="dropdown-item" href="#">Option 1</a>
+                        <a class="dropdown-item" href="#">Option 2</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Data Movimentação</th>
+                            <th>Tipo</th>
+                            <th>Responsável</th>
+                            <th>Observação</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody id="movimentacaoTableBody">
+                        <!-- Dados serão preenchidos dinamicamente -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para movimentação entrada -->
+    <div class="modal fade" id="movimentacaoEntradaModal" tabindex="-1" role="dialog" aria-labelledby="movimentacaoEntradaModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="movimentacaoEntradaModalLabel">Movimentação de Estoque</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="movimentacaoEstoqueForm">
+                        <div class="form-group row">
+                            <label for="documento" class="col-sm-2 col-form-label">Documento</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="documento" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="data" class="col-sm-2 col-form-label">Data</label>
+                            <div class="col-sm-4">
+                                <input type="date" class="form-control" id="data">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="tipo" class="col-sm-2 col-form-label">Tipo</label>
+                            <div class="col-sm-4">
+                                <select class="form-control" id="tipo">
+                                    <option value="entrada">Entrada</option>
+                                    <option value="saida">Saída</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="motivo" class="col-sm-2 col-form-label">Motivo</label>
+                            <div class="col-sm-10">
+                                <select class="form-control" id="motivo">
+                                    <option value="levantamento">Levantamento</option>
+                                    <option value="sobras">Motivo de estoque para sobra na conferência cega</option>
+                                    <option value="quebra">Quebra</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="observacao" class="col-sm-2 col-form-label">Observação</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="observacao">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="produtoCodigo" class="col-sm-2 col-form-label">Produto</label>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control" id="produtoCodigo" placeholder="Código ou Nome">
+                            </div>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" id="produtoNome" disabled placeholder="Nome do Produto">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="produtoUnidade" class="col-sm-2 col-form-label">Unidade</label>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control" id="produtoUnidade" placeholder="Unidade" disabled>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="quantidade" class="col-sm-2 col-form-label">Quantidade</label>
+                            <div class="col-sm-4">
+                                <input type="number" class="form-control" id="quantidade" placeholder="0,00">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-12 text-right">
+                                <button type="button" class="btn btn-success" id="adicionarProduto">Incluir</button>
+                                <button type="button" class="btn btn-warning" id="alterarProduto">Alterar</button>
+                                <button type="button" class="btn btn-danger" id="excluirProduto">Excluir</button>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th><input type="checkbox" id="selectAll"></th>
+                                        <th>Produto</th>
+                                        <th>Descrição</th>
+                                        <th>Unidade</th>
+                                        <th>Quantidade</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="itensMovimentacao">
+                                    <!-- Itens da movimentação serão adicionados aqui -->
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="form-group text-right">
+                            <button type="button" class="btn btn-primary" id="confirmarMovimentacao">Confirmar Movimentação</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para visualizar movimentação -->
+    <div class="modal fade" id="visualizarMovimentacaoModal" tabindex="-1" role="dialog" aria-labelledby="visualizarMovimentacaoModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="visualizarMovimentacaoModalLabel">Detalhes da Movimentação</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group row">
+                            <label for="visualizarId" class="col-sm-2 col-form-label">ID</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="visualizarId" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="visualizarDataMovimentacao" class="col-sm-2 col-form-label">Data Movimentação</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="visualizarDataMovimentacao" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="visualizarTipo" class="col-sm-2 col-form-label">Tipo</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="visualizarTipo" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="visualizarResponsavel" class="col-sm-2 col-form-label">Responsável</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="visualizarResponsavel" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="visualizarObservacao" class="col-sm-2 col-form-label">Observação</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="visualizarObservacao" readonly>
+                            </div>
+                        </div>
+                        <!-- Adicione mais campos conforme necessário -->
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,146 @@
+### Usuário - Login
+POST http://localhost:3000/usuarios/login
+Content-Type: application/json
+
+{
+  "email": "novo@example.com",
+  "senha": "senha123"
+}
+
+### Criar Usuário
+POST http://localhost:3000/usuarios
+Content-Type: application/json
+
+{
+  "nome": "teste",
+  "email": "teste@example.com",
+  "senha": "123"
+}
+
+### Obter todos os Usuários
+GET http://localhost:3000/usuarios
+
+### Obter Usuário por ID
+GET http://localhost:3000/usuarios/1
+
+### Atualizar Usuário
+PUT http://localhost:3000/usuarios/1
+Content-Type: application/json
+
+{
+  "nome": "Usuario Atualizado",
+  "email": "atualizado@example.com",
+  "senha": "novaSenha123"
+}
+
+### Deletar Usuário
+DELETE http://localhost:3000/usuarios/1
+
+### Criar Grupo
+POST http://localhost:3000/grupos
+Content-Type: application/json
+
+{
+  "nome": "Eletrônicos"
+}
+
+### Obter todos os Grupos
+GET http://localhost:3000/grupos
+
+### Obter Grupo por ID
+GET http://localhost:3000/grupos/1
+
+### Atualizar Grupo
+PUT http://localhost:3000/grupos/1
+Content-Type: application/json
+
+{
+  "nome": "Eletrônicos Atualizados"
+}
+
+### Deletar Grupo
+DELETE http://localhost:3000/grupos/1
+
+### Criar Produto
+POST http://localhost:3000/produtos
+Content-Type: application/json
+
+{
+  "nome": "Notebook",
+  "grupo_id": 1,
+  "unidade_medida_id": 1,
+  "estoque_atual": 10
+}
+
+### Obter todos os Produtos
+GET http://localhost:3000/produtos
+
+### Obter Produto por ID
+GET http://localhost:3000/produtos/1
+
+### Atualizar Produto
+PUT http://localhost:3000/produtos/1
+Content-Type: application/json
+
+{
+  "nome": "Notebook Atualizado",
+  "grupo_id": 1,
+  "unidade_medida_id": 1,
+  "estoque_atual": 15
+}
+
+### Deletar Produto
+DELETE http://localhost:3000/produtos/1
+
+### Criar Unidade de Medida
+POST http://localhost:3000/unidades_medida
+Content-Type: application/json
+
+{
+  "nome": "teste"
+}
+
+### Obter todas as Unidades de Medida
+GET http://localhost:3000/unidades_medida
+
+### Criar Movimentação
+POST http://localhost:3000/movimentacoes
+Content-Type: application/json
+
+{
+  "data_movimentacao": "2024-06-13T00:00:00.000Z",
+  "tipo": "entrada",
+  "responsavel_id": 1,
+  "observacao": "Recebimento de mercadorias",
+  "itens": [
+    {
+      "produtoCodigo": 1,
+      "produtoNome": "Notebook",
+      "produtoUnidade": "Unidade",
+      "quantidade": 5
+    }
+  ]
+}
+
+### Obter todas as Movimentações
+GET http://localhost:3000/movimentacoes
+
+### Obter Movimentação por ID
+GET http://localhost:3000/movimentacoes/1
+
+### Criar Item de Movimentação
+POST http://localhost:3000/itens_movimentacao
+Content-Type: application/json
+
+{
+  "movimentacao_id": 1,
+  "produto_id": 1,
+  "quantidade": 5,
+  "unidade": "Unidade"
+}
+
+### Obter todos os Itens de Movimentação
+GET http://localhost:3000/itens_movimentacao
+
+### Deletar Item de Movimentação
+DELETE http://localhost:3000/itens_movimentacao/1
